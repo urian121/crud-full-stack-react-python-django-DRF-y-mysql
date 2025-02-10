@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  font-weight: 900 !important;
+}
+h5{
+  width: 100% !important;
+  font-weight: bold !important;
+  text-align: center !important;
+}
+.form-check-input:checked {
+  background-color: #44b78b !important;
+  border: #44b78b !important;
+}
+input[type="range"]::-moz-range-thumb {
+  background-color: #44b78b !important;
+  border: #44b78b !important;
+
+}
+input[type="range"]::-webkit-slider-thumb {
+  height: 20px !important;
+  width: 20px !important;
+}
+.btn-primary {
+  background-color: #44b78b !important;
+  border: #44b78b !important;
+  font-weight: bold !important;
+}
+.btn-warning {
+  background-color: #22bb80 !important;
+  border: #22bb80 !important;
+  color: #fff !important;
+  font-weight: bold !important;
+}
+.navbar{
+  background-color: #0c4b33 !important;
+  color: #fff !important;
+}
+.list-contacts{
+  height: 700px;
+  overflow-x: auto;
+  padding: 15px;
+}
