@@ -58,10 +58,12 @@ const ContactModal = ({
                   </select>
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Edad</label>
+                  <label className="form-label">
+                    Edad: {selectedContact.edad} años
+                  </label>
                   <input
-                    type="number"
-                    className="form-control"
+                    type="range"
+                    className="form-range"
                     value={selectedContact.edad}
                     onChange={(e) =>
                       setSelectedContact({
@@ -69,9 +71,11 @@ const ContactModal = ({
                         edad: e.target.value,
                       })
                     }
-                    required
+                    min="18"
+                    max="60"
                   />
                 </div>
+
                 <div className="mb-3">
                   <label className="form-label">Sexo</label>
                   <select
@@ -89,7 +93,7 @@ const ContactModal = ({
                     <option value="Femenino">Femenino</option>
                   </select>
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mt-5">
                   <button type="submit" className="btn btn-primary">
                     Guardar cambios &nbsp; <i className="bi bi-arrow-right"></i>
                   </button>
