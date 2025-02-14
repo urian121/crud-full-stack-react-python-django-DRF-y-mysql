@@ -9,10 +9,10 @@ const Formulario = () => {
 
   return (
     <>
-      <h2 className="text-center fw-bold border-bottom mb-4">
+      <h2 className="text-center fw-bold border-bottom mb-4 p-2">
         Agregar Contacto
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className="mb-3">
           <label htmlFor="nombre" className="form-label">
             Nombre
@@ -102,6 +102,17 @@ const Formulario = () => {
               {hablaIngles ? "Sí" : "No"}
             </label>
           </div>
+        </div>
+
+        <div className="mb-3 mt-4">
+          <label className="form-label">Cambiar Foto del empleado</label>
+          <input
+            className="form-control form-control-sm"
+            type="file"
+            name="avatar"
+            {...register("foto_contacto")}
+            accept="image/png, image/jpeg"
+          />
         </div>
 
         <button type="submit" className="btn btn-primary w-100">

@@ -45,59 +45,109 @@ const useContacts = () => {
 
 
 const onSubmit = async (data) => {
-      console.log("Datos recibidos:", data);
-      try {
-        const response = await axios.post(
-          "http://127.0.0.1:8000/api/contactos/nuevo/",
-          data
-        );
-        console.log("Respuesta del servidor**:", response.data);
-        miToast("Contacto agregado correctamente", "success");
+  console.log("Datos recibidos:", data);
 
-        // setContacts((prevContacts) => [...prevContacts, response.data]); // Agregar nuevo contacto directamente
-        // fetchContacts();
-        // reset(); // Resetea el formulario después de enviar los datos
-      } catch (error) {
-        console.error("Error al guardar contacto:", error);
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => {
+    formData.append(key, key === "foto_contacto" ? value[0] : value);
+  });
+
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/contactos/nuevo/",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
       }
-  };
-  
+    );
+    console.log("Respuesta del servidor**:", response.data);
+    miToast("Contacto agregado correctamente", "success");
+  } catch (error) {
+    console.error("Error al guardar contacto:", error);
+  }
 
-  const eliminarContacto = async (id) => {
-    try {
-      await axios.delete(`${URL_API}${id}/eliminar/`);
-      setContacts((prevContacts) => prevContacts.filter((c) => c.id !== id));
-      miToast("Contacto eliminado correctamente", "warning");
-    } catch (error) {
-      console.error("Error al eliminar el contacto:", error);
+  /* try {
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/contactos/nuevo/",
+      data
+    );
+    console.log("Respuesta del servidor**:", response.data);
+    miToast("Contacto agregado correctamente", "success");
+
+    // setContacts((prevContacts) => [...prevContacts, response.data]); // Agregar nuevo contacto directamente
+    // fetchContacts();
+    // reset(); // Resetea el formulario después de enviar los datos
+  } catch (error) {
+    console.error("Error al guardar contacto:", error);
+  }*/
+};
+
+const eliminarContacto = async (id) => {
+  try {
+    await axios.delete(`${URL_API}${id}/eliminar/`);
+    setContacts((prevContacts) => prevContacts.filter((c) => c.id !== id));
+    miToast("Contacto eliminado correctamente", "warning");
+  } catch (error) {
+    console.error("Error al eliminar el contacto:", error);
+  }
+};
+
+const actualizarContacto = async (contact, onSuccess) => {
+  try {
+    const formData = new FormData();
+
+    // Agregar campos al FormData
+    formData.append("nombre", contact.nombre);
+    formData.append("profesion", contact.profesion);
+    formData.append("edad", contact.edad);
+    formData.append("sexo", contact.sexo);
+
+    // Si hay una nueva imagen, agregarla al FormData
+    if (contact.foto_contacto instanceof File) {
+      formData.append("foto_contacto", contact.foto_contacto);
     }
-  };
 
-  const actualizarContacto = async (contact, onSuccess) => {
-    try {
-      await axios.put(`${URL_API}${contact.id}/actualizar/`, contact);
-      miToast("Contacto actualizado correctamente", "info");
-      fetchContacts(); // Actualiza la lista
-      if (onSuccess) onSuccess();
-    } catch (error) {
-      console.error("Error al actualizar el contacto:", error);
-    }
-  };
+    await axios.put(`${URL_API}${contact.id}/actualizar/`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-  return {
-    contacts,
-    loading,
-    error,
-    fetchContacts,
-    eliminarContacto,
-    actualizarContacto,
+    miToast("Contacto actualizado correctamente", "info");
+    fetchContacts(); // Actualiza la lista
+    if (onSuccess) onSuccess();
+  } catch (error) {
+    console.error("Error al actualizar el contacto:", error);
+  }
+};
 
-    register,
-    handleSubmit,
-    watch,
-    errors,
-    onSubmit,
-  };
+/*
+const actualizarContacto = async (contact, onSuccess) => {
+  try {
+    await axios.put(`${URL_API}${contact.id}/actualizar/`, contact);
+    miToast("Contacto actualizado correctamente", "info");
+    fetchContacts(); // Actualiza la lista
+    if (onSuccess) onSuccess();
+  } catch (error) {
+    console.error("Error al actualizar el contacto:", error);
+  }
+};*/
+
+return {
+  contacts,
+  loading,
+  error,
+  fetchContacts,
+  eliminarContacto,
+  actualizarContacto,
+
+  register,
+  handleSubmit,
+  watch,
+  errors,
+  onSubmit,
+  reset,
+};
 };
 
 export default useContacts;

@@ -27,7 +27,7 @@ const Contacts = () => {
 
   return (
     <>
-      <h2 className="text-center fw-bold border-bottom mb-4 mt-5">
+      <h2 className="text-center fw-bold border-bottom mb-4 mt-5 p-2">
         Lista de Contactos{" "}
         <strong className="float-end">({contacts.length})</strong>
       </h2>
@@ -42,9 +42,14 @@ const Contacts = () => {
             >
               <div className="col-3">
                 <img
-                  src="./avatar.png"
+                  src={
+                    contact.foto_contacto
+                      ? `http://127.0.0.1:8000${contact.foto_contacto}`
+                      : "/avatar.png"
+                  }
                   alt={contact.nombre}
-                  className="img-fluid"
+                  className="img-fluid rounded-circle"
+                  style={{ width: "60px", height: "60px", objectFit: "cover" }}
                 />
               </div>
               <div className="col-6">

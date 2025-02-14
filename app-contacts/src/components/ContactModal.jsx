@@ -20,7 +20,10 @@ const ContactModal = ({
           </div>
           <div className="modal-body">
             {selectedContact && (
-              <form onSubmit={handleUpdateContact}>
+              <form
+                onSubmit={handleUpdateContact}
+                encType="multipart/form-data"
+              >
                 <div className="mb-3">
                   <label className="form-label">Nombre</label>
                   <input
@@ -93,6 +96,43 @@ const ContactModal = ({
                     <option value="Femenino">Femenino</option>
                   </select>
                 </div>
+
+                <div className="mb-3 mt-4">
+                  <label className="form-label">
+                    Cambiar Foto del empleado
+                  </label>
+                  <input
+                    className="form-control form-control-sm"
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    onChange={(e) =>
+                      setSelectedContact({
+                        ...selectedContact,
+                        foto_contacto: e.target.files[0],
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="text-center mt-3">
+                  <img
+                    src={
+                      selectedContact?.foto_contacto instanceof File
+                        ? URL.createObjectURL(selectedContact.foto_contacto)
+                        : selectedContact?.foto_contacto
+                        ? `http://127.0.0.1:8000${selectedContact.foto_contacto}`
+                        : "/avatar.png"
+                    }
+                    alt={selectedContact?.nombre || "Contacto"}
+                    className="img-fluid rounded-circle"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+
                 <div className="d-flex justify-content-center mt-5">
                   <button type="submit" className="btn btn-primary">
                     Guardar cambios &nbsp; <i className="bi bi-arrow-right"></i>
