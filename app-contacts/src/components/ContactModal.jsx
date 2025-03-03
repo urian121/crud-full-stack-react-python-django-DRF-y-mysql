@@ -121,7 +121,7 @@ const ContactModal = ({
                         ? URL.createObjectURL(selectedContact.foto_contacto)
                         : selectedContact?.foto_contacto
                         ? `http://127.0.0.1:8000${selectedContact.foto_contacto}`
-                        : "/avatar.png"
+                        : "http://localhost:5174/avatar.png"
                     }
                     alt={selectedContact?.nombre || "Contacto"}
                     className="img-fluid rounded-circle"

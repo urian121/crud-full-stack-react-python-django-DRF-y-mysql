@@ -22,7 +22,7 @@ from django.conf.urls.static import static # Importamos el modulo static para su
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('contactos.urls')), #Incluyendo las rutas de contactos en la API
+    path('', include('contactos.urls')), #Incluyendo las rutas de contactos en la API
 ]
 
 

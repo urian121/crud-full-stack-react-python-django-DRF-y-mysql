@@ -6,5 +6,6 @@ export const profesiones = [
   "Diseñador UI/UX",
   "Analista de datos",
   "Desarrollador móvil",
+  "Desarrollador React Native",
   "Desarrollador web",
 ];

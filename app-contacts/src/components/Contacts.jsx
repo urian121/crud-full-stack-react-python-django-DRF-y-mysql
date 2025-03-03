@@ -45,7 +45,7 @@ const Contacts = () => {
                   src={
                     contact.foto_contacto
                       ? `http://127.0.0.1:8000${contact.foto_contacto}`
-                      : "/avatar.png"
+                      : "http://localhost:5174/avatar.png"
                   }
                   alt={contact.nombre}
                   className="img-fluid rounded-circle"

@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import Contacto
 from .serializers import ContactoSerializer
+from .renombrar_img import asignar_nombre_aleatorio
 
 @api_view(['GET'])
 def listar_contactos(request):
@@ -24,7 +25,10 @@ def crear_contacto(request):
 @api_view(['POST'])
 def crear_contacto(request):
     data = request.data.copy()  # Copia mutable de los datos
-    data['foto_contacto'] = request.FILES.get('foto_contacto')  # Agregar la imagen
+
+    imagen = request.FILES.get('foto_contacto')
+    if imagen:
+        data['foto_contacto'] = asignar_nombre_aleatorio(imagen)  # Asignar nuevo nombre
 
     serializer = ContactoSerializer(data=data)
     if serializer.is_valid():
@@ -49,13 +53,14 @@ def actualizar_contacto(request, id):
     try:
         contacto = Contacto.objects.get(pk=id)
         
-        # Convertimos los datos en un diccionario mutable
+        # Copia mutable de los datos del request
         data = request.data.copy()
-        
-        # Si se envió una nueva imagen, actualizarla en el objeto
-        if "foto_contacto" in request.FILES:
-            data["foto_contacto"] = request.FILES["foto_contacto"]
-        
+
+        # Si se envía una nueva imagen, asignarle un nombre aleatorio
+        imagen = request.FILES.get("foto_contacto")
+        if imagen:
+            data["foto_contacto"] = asignar_nombre_aleatorio(imagen)
+
         serializer = ContactoSerializer(contacto, data=data, partial=True)  # `partial=True` permite actualizar solo algunos campos
         if serializer.is_valid():
             serializer.save()
@@ -64,6 +69,7 @@ def actualizar_contacto(request, id):
     
     except Contacto.DoesNotExist:
         return Response({"error": "No encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
 
 
 """
