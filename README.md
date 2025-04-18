@@ -3,7 +3,7 @@
 Acontinuación, esta es una aplicación web desarrollada con **React** y **Bootstrap** que permite gestionar contactos de manera eficiente.
 Los usuarios pueden agregar, editar y eliminar contactos, incluyendo la selección de una profesión desde una lista predefinida.
 
-![Vista previa](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/refs/heads/master/crud-full-stack-react--django-mysql.png)
+![Vista previa](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/refs/heads/master/crud-full-stack-react-django-mysql-urian-viera.png)
 
 ## 🚀 Tecnologías Utilizadas
 
