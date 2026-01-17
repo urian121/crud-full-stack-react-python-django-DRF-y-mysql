@@ -1,4 +1,4 @@
-# 📌 CRUD FullStack con React, Python, Django (DRF) y MySQL para Gestión de Contactos
+# CRUD FullStack con React, Python, Django (DRF) y MySQL para Gestión de Contactos
 
 Acontinuación, esta es una aplicación web desarrollada con **React** y **Bootstrap** que permite gestionar contactos de manera eficiente.
 Los usuarios pueden agregar, editar y eliminar contactos, incluyendo la selección de una profesión desde una lista predefinida.
@@ -12,7 +12,7 @@ Los usuarios pueden agregar, editar y eliminar contactos, incluyendo la selecci�
 - **React Hook Form** (Manejo de formularios)
 - **JSON Server / API Backend** (Para almacenar datos, si aplica)
 
-## 📌 Funcionalidades
+## Funcionalidades
 
 ✅ Agregar nuevos contactos con información detallada.  
 ✅ Editar contactos existentes, con selección de profesión desde una lista predefinida.  
@@ -37,8 +37,6 @@ Los usuarios pueden agregar, editar y eliminar contactos, incluyendo la selecci�
 ```bash
  npm run dev
 ```
-
-
 
 ## 🙌 Cómo puedes apoyar 📢:
 
